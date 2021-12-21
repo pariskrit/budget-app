@@ -1,0 +1,14 @@
+@import "../../styleSass/variables.scss";
+@import "../../styleSass/mixins.scss";
+
+.sidebar {
+  width: 388px;
+  height: 100vh;
+  background-color: $primaryColor;
+}
+
+.header {
+  @include centerElement;
+  padding: 40px 0;
+  color: $secondaryColor;
+}

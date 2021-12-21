@@ -1,0 +1,18 @@
+@import "../../styleSass/variables.scss";
+
+.element {
+  display: flex;
+  width: 35%;
+  gap: 15px;
+  align-items: center;
+  margin: 4px auto;
+  border-radius: 5px;
+  padding: 8px 14px;
+  color: $secondaryColor;
+  cursor: pointer;
+  transition: border 0.2s ease-in;
+  border: 1px solid $primaryColor;
+  &:hover {
+    border: 1px solid $secondaryColor;
+  }
+}
