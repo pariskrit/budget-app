@@ -7,7 +7,7 @@ function Siderbar() {
   return (
     <div className="sidebar">
       <div className="header">
-        <h1>Budget Track</h1>
+        <h1>BUDGET TRACK</h1>
       </div>
       <div>
         <SidebarElement Icon={AiOutlineMenu} title="Overview" />

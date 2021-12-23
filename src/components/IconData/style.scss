@@ -1,0 +1,20 @@
+@import "../../styleSass/mixins.scss";
+@import "../../styleSass/variables.scss";
+
+.iconData {
+  @include flexElement;
+}
+
+.icon {
+  font-size: 24px;
+}
+
+.primary {
+  color: $thirdColor;
+  font-size: 12px;
+}
+
+.secondary {
+  color: white;
+  font-size: 14px;
+}

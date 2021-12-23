@@ -1,0 +1,44 @@
+.topbar {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 8px 20px;
+  min-height: 75px;
+  background-color: #4e4747;
+  border-left: 1px solid white;
+}
+
+.topbar_rightside {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  flex: 0.23;
+}
+
+.topbar_rightside_right {
+  margin: 0 5px;
+  color: white;
+  font-size: 12px;
+  cursor: pointer;
+}
+
+.icon {
+  font-size: 30px;
+  margin: 0 5px;
+  cursor: pointer;
+}
+
+.topbar_name {
+  font-size: 15px;
+  color: #a8a2a2;
+}
+
+.topbar_greet {
+  color: white;
+  margin: 2px 0 !important;
+}
+
+.topbar_date {
+  font-size: 12px;
+  color: #a8a2a2;
+}

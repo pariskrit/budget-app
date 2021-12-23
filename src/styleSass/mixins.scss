@@ -1,4 +1,9 @@
-@mixin centerElement {
+@mixin flexElement {
   display: flex;
-  justify-content: center;
+  align-items: center;
+}
+
+@mixin flexWithJustify {
+  @include flexElement();
+  justify-content: space-between;
 }

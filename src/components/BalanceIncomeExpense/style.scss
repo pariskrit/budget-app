@@ -1,0 +1,33 @@
+@import "../../styleSass/variables.scss";
+@import "../../styleSass/mixins.scss";
+
+.balanceincomeexpense {
+  background-color: $primaryColor;
+  padding: 20px 50px;
+  border-radius: 5px;
+}
+
+.balanceincomeexpense_top {
+  @include flexWithJustify;
+  padding-bottom: 10px;
+  border-bottom: 1px solid white;
+
+  h1 {
+    color: white;
+  }
+}
+
+.balanceincomeexpense_bottom {
+  @include flexWithJustify;
+  margin-top: 10px;
+}
+
+.balance {
+  color: $thirdColor;
+  font-size: 12px;
+}
+
+.amount {
+  color: white;
+  font-size: 14px;
+}
