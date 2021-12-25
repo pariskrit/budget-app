@@ -1,5 +1,30 @@
 @import "../../styleSass/variables.scss";
+@import "../../styleSass/mixins.scss";
 
 .latesttransactions {
   background-color: $primaryColor;
+  border-radius: 5px;
+  padding: 15px 20px;
+}
+
+.latesttransactions_headercontainer {
+  @include flexWithJustify;
+  padding-bottom: 3px;
+  // border-bottom: 1px solid white;
+
+  p {
+    color: white;
+
+    cursor: pointer;
+    text-decoration: underline;
+    text-decoration-color: $primaryColor;
+    transition: text-decoration 0.1s ease-in;
+
+    &:hover {
+      text-decoration-color: white;
+    }
+  }
+}
+.latesttransactions_header {
+  color: white;
 }

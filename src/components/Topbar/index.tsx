@@ -2,6 +2,7 @@ import React from "react";
 import "./style.scss";
 import { IoNotificationsOutline } from "react-icons/io5";
 import { AiOutlineUser, AiOutlineCaretDown } from "react-icons/ai";
+import IconWithTexts from "../IconWithTexts";
 
 function Topbar() {
   return (
@@ -13,12 +14,14 @@ function Topbar() {
       </div>
       <div className="topbar_rightside">
         <IoNotificationsOutline className="icon" />
-        <AiOutlineUser className="icon" />
-        <div className="topbar_rightside_right">
-          <p>Pariskrit</p>
-          <p className="topbar_date">User</p>
+        <div className="topbar_userdetail">
+          <AiOutlineUser className="icon" />
+          <div className="topbar_rightside_right">
+            <p>Pariskrit</p>
+            <p className="topbar_date">User</p>
+          </div>
+          <AiOutlineCaretDown />
         </div>
-        <AiOutlineCaretDown />
       </div>
     </div>
   );

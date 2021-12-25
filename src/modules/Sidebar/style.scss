@@ -8,7 +8,7 @@
 }
 
 .header {
-  @include flexWithJustify;
+  @include flexWithCenter;
   padding: 40px 0;
   color: $secondaryColor;
 }

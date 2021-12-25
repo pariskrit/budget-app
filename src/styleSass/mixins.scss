@@ -7,3 +7,8 @@
   @include flexElement();
   justify-content: space-between;
 }
+
+@mixin flexWithCenter {
+  @include flexElement();
+  justify-content: center;
+}

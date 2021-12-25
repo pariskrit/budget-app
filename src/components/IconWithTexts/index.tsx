@@ -5,11 +5,17 @@ interface IconDataType {
   Icon: any;
   primaryText: string;
   secondaryText: string;
+  showIcon?: boolean;
 }
-function IconData({ Icon, primaryText, secondaryText }: IconDataType) {
+function IconWithTexts({
+  Icon,
+  primaryText,
+  secondaryText,
+  showIcon = true,
+}: IconDataType) {
   return (
     <div className="iconData">
-      <Icon className="icon" />
+      {showIcon && <Icon className="icon" />}
       <div>
         <p className="primary">{primaryText}</p>
         <p className="secondary">{secondaryText}</p>
@@ -18,4 +24,4 @@ function IconData({ Icon, primaryText, secondaryText }: IconDataType) {
   );
 }
 
-export default IconData;
+export default IconWithTexts;
