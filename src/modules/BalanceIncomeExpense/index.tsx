@@ -2,7 +2,7 @@ import React from "react";
 import "./style.scss";
 import { GiPayMoney } from "react-icons/gi";
 import { GiReceiveMoney } from "react-icons/gi";
-import IconWithTexts from "../IconWithTexts";
+import IconWithTexts from "../../components/IconWithTexts";
 
 function BalanceIncomeExpense() {
   return (

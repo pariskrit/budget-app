@@ -1,5 +1,5 @@
 import React from "react";
-import BalanceIncomeExpense from "../../components/BalanceIncomeExpense";
+import BalanceIncomeExpense from "../BalanceIncomeExpense";
 import BarPieChart from "../BarPieChart";
 import LatestTransactions from "../LatestTransactions";
 import "./style.scss";

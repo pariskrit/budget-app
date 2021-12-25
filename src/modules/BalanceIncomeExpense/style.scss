@@ -3,23 +3,25 @@
 
 .balanceincomeexpense {
   background-color: $primaryColor;
-  padding: 20px 50px;
+  padding: 30px 40px;
   border-radius: 5px;
 }
 
 .balanceincomeexpense_top {
   @include flexWithJustify;
-  padding-bottom: 10px;
+  padding-bottom: 20px;
   border-bottom: 1px solid white;
 
   h1 {
     color: white;
+    font-size: 40px;
+    letter-spacing: 3px;
   }
 }
 
 .balanceincomeexpense_bottom {
   @include flexWithJustify;
-  margin-top: 10px;
+  margin-top: 20px;
 }
 
 .balance {
