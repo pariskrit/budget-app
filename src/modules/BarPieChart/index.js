@@ -1,57 +1,55 @@
 import React from "react";
 import "./style.scss";
-import { Bar } from "react-chartjs-2";
 import {
-  Chart as ChartJS,
-  CategoryScale,
-  LinearScale,
-  BarElement,
-  Title,
+  BarChart,
+  Bar,
+  Label,
+  LabelList,
+  XAxis,
+  YAxis,
+  CartesianGrid,
   Tooltip,
   Legend,
-} from "chart.js";
+  ResponsiveContainer,
+} from "recharts";
 
-ChartJS.register(
-  CategoryScale,
-  LinearScale,
-  BarElement,
-  Title,
-  Tooltip,
-  Legend
-);
-
-const labels = ["August", "September", "October", "November", "December"];
-
-const data = {
-  labels,
-  datasets: [
-    {
-      label: "Money Spent",
-      data: [1000, 10000, 30000],
-      backgroundColor: "rgba(255, 99, 132, 0.5)",
-    },
-  ],
-};
-
-export const options = {
-  responsive: true,
-  plugins: {
-    legend: {
-      maxHeight: 100,
-      maxWidth: 10,
-    },
-    title: {
-      display: true,
-      text: "Monthly Expenditure Bar Chart",
-      color: "white",
-    },
+const data = [
+  {
+    name: "August",
+    expense: 4000,
   },
-};
+  {
+    name: "September",
+    expense: 3000,
+  },
+  {
+    name: "October",
+    expense: 2000,
+  },
+  {
+    name: "November",
+    expense: 2780,
+  },
+  {
+    name: "December",
+    expense: 1890,
+  },
+];
 
 function BarPieChart() {
   return (
     <div className="barchart">
-      <Bar data={data} options={options} />
+      <BarChart width={800} height={250} data={data} barSize={50}>
+        <CartesianGrid strokeDasharray="3 3" />
+        <XAxis dataKey="name" />
+        <YAxis dataKey="expense" />
+        <Tooltip />
+        <Legend />
+        <Bar dataKey="expense" fill="#ffff">
+          <LabelList dataKey="expense" position="top" fill="white" />
+        </Bar>
+        {/* <Bar dataKey="expense" fill="#ffff" label={{ fill: "black" }} /> */}
+      </BarChart>
     </div>
   );
 }
