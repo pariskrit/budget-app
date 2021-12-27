@@ -1,9 +1,7 @@
 @import "../../styleSass/mixins.scss";
 
 .topbar {
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
+  @include flexWithJustify;
   padding: 8px 20px;
   min-height: 75px;
   background-color: #4e4747;

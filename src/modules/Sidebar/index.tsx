@@ -10,7 +10,7 @@ function Siderbar() {
         <h1>BUDGET TRACK</h1>
       </div>
       <div>
-        <SidebarElement Icon={AiOutlineMenu} title="Overview" />
+        <SidebarElement Icon={AiOutlineMenu} title="Overview" selected />
         <SidebarElement Icon={AiOutlineMenu} title="Transactions" />
         <SidebarElement Icon={AiOutlineMenu} title="Overview" />
       </div>
