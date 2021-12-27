@@ -4,7 +4,7 @@ import "./style.scss";
 interface buttonType {
   children: string;
   type: "button" | "submit";
-  onClick: () => void;
+  onClick: (e: any) => void;
 }
 function Button({ children, ...rest }: buttonType) {
   return (
