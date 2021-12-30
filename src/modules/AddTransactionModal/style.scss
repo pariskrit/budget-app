@@ -1,0 +1,24 @@
+@import "../../styleSass/variables.scss";
+@import "../../styleSass/mixins.scss";
+
+.transactionModal_header {
+  @include flexWithCenter;
+  text-decoration: underline;
+}
+.fieldsContainer {
+  margin: 10px 0;
+
+  label {
+    color: $thirdColor;
+  }
+
+  input {
+    width: 50%;
+    padding: 10px;
+    background-color: white;
+    outline: none;
+    border: none;
+    border-radius: 5px;
+    margin: 5px 0;
+  }
+}

@@ -22,16 +22,20 @@ export const defaultReducerState = {
 
 export type actionType =
   | { type: "TOGGLE_ADD_MODAL" }
-  | { type: "TOGGLE_DETAIL_MODAL" };
+  | { type: "TOGGLE_DETAIL_MODAL" }
+  | { type: "ADD_TRANSACTION"; payload: transactionInterface };
 
 export const reducer = (state: reducerStateInterface, action: actionType) => {
-  const { showAddModal, showDetailModal } = state;
+  const { showAddModal, showDetailModal, transactions } = state;
   switch (action.type) {
     case "TOGGLE_ADD_MODAL":
       return { ...state, showAddModal: !showAddModal };
 
     case "TOGGLE_DETAIL_MODAL":
       return { ...state, showDetailModal: !showDetailModal };
+
+    case "ADD_TRANSACTION":
+      return { ...state, transactions: [action.payload, ...transactions] };
     default:
       return state;
   }

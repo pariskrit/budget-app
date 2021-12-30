@@ -4,7 +4,7 @@ import Topbar from "../../components/Topbar";
 import "./style.scss";
 import HomeContainer from "../../modules/HomeContainer";
 import TransactionContextProvider from "../../context/TransactionContextProvider";
-import AddModal from "../../modules/AddModal";
+import AddModal from "../../modules/AddTransactionModal";
 import TransactionDetailModal from "../../modules/TransactionDetailModal";
 
 function Home() {

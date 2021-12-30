@@ -21,10 +21,11 @@
 }
 
 .modal_container {
+  border-radius: 5px;
   z-index: 3;
   color: white;
   background-color: $primaryColor;
-
-  height: 500px;
+  padding: 20px;
+  height: 300px;
   width: 400px;
 }

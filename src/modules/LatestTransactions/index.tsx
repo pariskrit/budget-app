@@ -26,7 +26,7 @@ function LatestTransactions() {
         </strong>
         <p>view all</p>
       </div>
-      {state.transactions.map((detail) => (
+      {state.transactions.slice(0, 3).map((detail) => (
         <TransactionDetailRow
           key={detail.id}
           transaction={detail}
