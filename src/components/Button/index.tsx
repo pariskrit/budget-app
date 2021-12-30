@@ -4,7 +4,7 @@ import "./style.scss";
 interface buttonType {
   children: string;
   type: "button" | "submit";
-  onClick: (e: any) => void;
+  onClick: (e: React.MouseEvent<HTMLButtonElement>) => void;
 }
 function Button({ children, ...rest }: buttonType) {
   return (

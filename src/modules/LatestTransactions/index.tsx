@@ -1,8 +1,23 @@
-import React from "react";
+import React, { useContext } from "react";
 import TransactionDetailRow from "../../components/TransactionDetailRow";
+import { TransactionContext } from "../../context/TransactionContextProvider";
 import "./style.scss";
 
+export interface transactionInterface {
+  id: number;
+  description: string;
+  date: string;
+  amount: number;
+}
+
 function LatestTransactions() {
+  const { state, dispatch } = useContext(TransactionContext);
+
+  const handleTransactionRowClick = (transaction: transactionInterface) => {
+    dispatch({ type: "TOGGLE_DETAIL_MODAL" });
+    console.log(transaction);
+  };
+
   return (
     <div className="latesttransactions">
       <div className="latesttransactions_headercontainer">
@@ -11,9 +26,13 @@ function LatestTransactions() {
         </strong>
         <p>view all</p>
       </div>
-      <TransactionDetailRow />
-      <TransactionDetailRow />
-      <TransactionDetailRow />
+      {state.transactions.map((detail) => (
+        <TransactionDetailRow
+          key={detail.id}
+          transaction={detail}
+          onClick={handleTransactionRowClick}
+        />
+      ))}
     </div>
   );
 }

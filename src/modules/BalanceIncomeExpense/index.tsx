@@ -1,10 +1,12 @@
-import React from "react";
+import React, { useContext } from "react";
 import "./style.scss";
 import { GiPayMoney } from "react-icons/gi";
 import { GiReceiveMoney } from "react-icons/gi";
 import IconWithTexts from "../../components/IconWithTexts";
+import { TransactionContext } from "../../context/TransactionContextProvider";
 
 function BalanceIncomeExpense() {
+  const { state, dispatch } = useContext(TransactionContext);
   return (
     <div className="balanceincomeexpense">
       <div className="balanceincomeexpense_top">
@@ -12,7 +14,7 @@ function BalanceIncomeExpense() {
         <IconWithTexts
           Icon={GiPayMoney}
           primaryText="Balance"
-          secondaryText="Rs 18000"
+          secondaryText={`Rs ${state.totalIncome - state.expense}`}
           showIcon={false}
         />
       </div>
@@ -20,12 +22,12 @@ function BalanceIncomeExpense() {
         <IconWithTexts
           Icon={GiPayMoney}
           primaryText="Expense"
-          secondaryText="Rs 2000"
+          secondaryText={`Rs ${state.totalIncome}`}
         />
         <IconWithTexts
           Icon={GiReceiveMoney}
           primaryText="Income"
-          secondaryText="Rs 20000"
+          secondaryText={`Rs ${state.expense}`}
         />
       </div>
     </div>
