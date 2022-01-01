@@ -1,4 +1,4 @@
-import React, { useContext } from "react";
+import React, { useContext, useEffect } from "react";
 import "./style.scss";
 import { GiPayMoney } from "react-icons/gi";
 import { GiReceiveMoney } from "react-icons/gi";
@@ -7,6 +7,7 @@ import { TransactionContext } from "../../context/TransactionContextProvider";
 
 function BalanceIncomeExpense() {
   const { state, dispatch } = useContext(TransactionContext);
+
   return (
     <div className="balanceincomeexpense">
       <div className="balanceincomeexpense_top">

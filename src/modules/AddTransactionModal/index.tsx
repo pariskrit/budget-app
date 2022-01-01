@@ -25,10 +25,19 @@ function AddTransactionModal() {
   const handleInputChange = (e: React.ChangeEvent<HTMLInputElement>) =>
     setTransactionDetail({
       ...transactionDetail,
-      [e.target.name]: e.target.value,
+      [e.target.name]:
+        e.target.type === "number" ? +e.target.value : e.target.value,
     });
 
   const handleAddClick = () => {
+    const isDescriptionEmpty = transactionDetail.description === "";
+    const isAmountEmpty =
+      transactionDetail.amount === 0 ||
+      transactionDetail.amount.toString() === "";
+
+    if (isDescriptionEmpty || isAmountEmpty) {
+      return;
+    }
     dispatch({
       type: "ADD_TRANSACTION",
       payload: { ...transactionDetail, id: Date.now() },
@@ -36,7 +45,6 @@ function AddTransactionModal() {
     setTransactionDetail(defaultTransactionDetail);
     onClose();
   };
-  console.log(transactionDetail);
   return (
     <Modal open={state.showAddModal} handleClose={onClose}>
       <div className="transactionModal_header">

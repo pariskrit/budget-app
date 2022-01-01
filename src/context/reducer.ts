@@ -17,7 +17,7 @@ export const defaultReducerState = {
     { id: 4, description: "Shoes", date: "july 7, 2021", amount: 800 },
   ],
   totalIncome: 10000,
-  expense: 1000,
+  expense: 950,
 };
 
 export type actionType =
@@ -35,7 +35,14 @@ export const reducer = (state: reducerStateInterface, action: actionType) => {
       return { ...state, showDetailModal: !showDetailModal };
 
     case "ADD_TRANSACTION":
-      return { ...state, transactions: [action.payload, ...transactions] };
+      return {
+        ...state,
+        transactions: [action.payload, ...transactions],
+        expense:
+          state.transactions.reduce((acc, curr) => curr.amount + acc, 0) +
+          action.payload.amount,
+      };
+
     default:
       return state;
   }
