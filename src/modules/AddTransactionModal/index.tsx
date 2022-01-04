@@ -5,7 +5,7 @@ import { TransactionContext } from "../../context/TransactionContextProvider";
 import "./style.scss";
 
 const defaultTransactionDetail = {
-  date: `${new Date().getDate()} December 2021`,
+  date: `${new Date().getDate()} January 2022`,
   description: "",
   amount: 0,
 };
@@ -46,16 +46,17 @@ function AddTransactionModal() {
     onClose();
   };
   return (
-    <Modal open={state.showAddModal} handleClose={onClose}>
-      <div className="transactionModal_header">
-        <h1>Add Transaction</h1>
-      </div>
+    <Modal
+      open={state.showAddModal}
+      handleClose={onClose}
+      title="Add Transaction"
+    >
       <div className="fieldsContainer">
         <label>
           <strong>Date:</strong>
         </label>
         <br />
-        <span>{`${new Date().getDate()} December 2021`}</span>
+        <span>{`${new Date().getDate()} January 2022`}</span>
       </div>
       <div className="fieldsContainer">
         <label>

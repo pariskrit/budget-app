@@ -17,7 +17,6 @@ function Home() {
           <HomeContainer />
         </div>
         <AddModal />
-        <TransactionDetailModal />
       </div>
     </TransactionContextProvider>
   );

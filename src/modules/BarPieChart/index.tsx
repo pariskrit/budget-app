@@ -42,12 +42,10 @@ function BarPieChart() {
   const { state, dispatch } = useContext(TransactionContext);
 
   useEffect(() => {
-    console.log("bar chart");
     const tempExpenses = [...monthlyExpenses];
     tempExpenses[monthlyExpenses.length - 1].expense = state.expense;
     setMonthlyExpenses(tempExpenses);
   }, [state.expense]);
-  console.log(monthlyExpenses);
   return (
     <div className="barchart">
       <BarChart width={800} height={250} data={monthlyExpenses} barSize={50}>
