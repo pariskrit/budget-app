@@ -20,6 +20,12 @@ function Topbar() {
       >
         Add Transaction
       </Button>
+      <Button
+        type="button"
+        onClick={() => dispatch({ type: "TOGGLE_INCOME_MODAL" })}
+      >
+        Add Income
+      </Button>
       <div className="topbar_rightside">
         <IoNotificationsOutline className="icon" />
         <div className="topbar_userdetail">

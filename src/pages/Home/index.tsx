@@ -1,24 +1,40 @@
-import React from "react";
+import React, { useEffect } from "react";
 import Siderbar from "../../modules/Sidebar";
 import Topbar from "../../components/Topbar";
 import "./style.scss";
 import HomeContainer from "../../modules/HomeContainer";
-import TransactionContextProvider from "../../context/TransactionContextProvider";
 import AddModal from "../../modules/AddTransactionModal";
-import TransactionDetailModal from "../../modules/TransactionDetailModal";
+import AddIncomeModal from "../../modules/AddIncomeModal";
+import { collection, doc, setDoc } from "firebase/firestore";
+import { db } from "../../firebase/config";
 
 function Home() {
+  useEffect(() => {
+    const fetchTransactions = async () => {
+      const transactions = collection(db, "cities");
+      console.log(transactions);
+      await setDoc(doc(transactions, "SF"), {
+        name: "San Francisco",
+        state: "CA",
+        country: "USA",
+        capital: false,
+        population: 860000,
+        regions: ["west_coast", "norcal"],
+      });
+    };
+
+    fetchTransactions();
+  }, []);
   return (
-    <TransactionContextProvider>
-      <div className="home">
-        <Siderbar />
-        <div className="right_container">
-          <Topbar />
-          <HomeContainer />
-        </div>
-        <AddModal />
+    <div className="home home-skeleton">
+      <Siderbar />
+      <div className="right_container">
+        <Topbar />
+        <HomeContainer />
       </div>
-    </TransactionContextProvider>
+      <AddModal />
+      <AddIncomeModal />
+    </div>
   );
 }
 

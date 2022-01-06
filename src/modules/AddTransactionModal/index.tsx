@@ -1,4 +1,4 @@
-import React, { useContext, useState } from "react";
+import React, { useContext, useEffect, useRef, useState } from "react";
 import Button from "../../components/Button";
 import Modal from "../../components/Modal";
 import { TransactionContext } from "../../context/TransactionContextProvider";
@@ -15,6 +15,7 @@ function AddTransactionModal() {
   const [transactionDetail, setTransactionDetail] = useState(
     defaultTransactionDetail
   );
+  let inputRef = useRef<HTMLInputElement>(null);
 
   const onClose = () => {
     setTransactionDetail(defaultTransactionDetail);
@@ -45,6 +46,13 @@ function AddTransactionModal() {
     setTransactionDetail(defaultTransactionDetail);
     onClose();
   };
+
+  useEffect(() => {
+    if (inputRef.current && state.showAddModal) {
+      inputRef.current.focus();
+    }
+  }, [state.showAddModal]);
+
   return (
     <Modal
       open={state.showAddModal}
@@ -69,6 +77,7 @@ function AddTransactionModal() {
           name="description"
           value={transactionDetail.description}
           onChange={handleInputChange}
+          ref={inputRef}
         />
       </div>
       <div className="fieldsContainer">
