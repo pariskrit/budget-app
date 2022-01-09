@@ -12,11 +12,12 @@ function TransactionDetailRow({
 }: transactionDetailInterface) {
   const { description, date, amount } = transaction;
   return (
-    <div className="transactiondetailrow" onClick={() => onClick(transaction)}>
+    <div className="transactiondetailrow " onClick={() => onClick(transaction)}>
       <span>&#8226;</span>
-      <div className="transactiondetailrow_detail">
-        <div className="transactiondetailrow_transactiondetail">
+      <div className="transactiondetailrow_detail transactiondetailrow-skeleton">
+        <div className="transactiondetailrow_transactiondetail ">
           <strong>{description}</strong>
+
           <p>{date}</p>
         </div>
         <p>-{amount}.00</p>
