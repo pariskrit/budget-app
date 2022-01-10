@@ -1,4 +1,4 @@
-import React, { useContext, useEffect } from "react";
+import React, { useContext } from "react";
 import Siderbar from "../Sidebar";
 import Topbar from "../../components/Topbar";
 import "./style.scss";
@@ -12,19 +12,20 @@ import { transactionInterface } from "../AllTransactions";
 import { Outlet } from "react-router-dom";
 
 function Layout() {
-  const { isLoading, data, isFetching } = useQuery(
+  const { isLoading, isFetching } = useQuery(
     "transactions",
-    fetchTransactions
+    fetchTransactions,
+    {
+      onSuccess: (data: { transactions: transactionInterface[] }) =>
+        onSuccess(data),
+    }
   );
   const { state, dispatch } = useContext(TransactionContext);
 
-  useEffect(() => {
-    if (data) {
-      const response = data as { transactions: transactionInterface[] };
-      dispatch({ type: "SET_TRANSACTIONS", payload: response.transactions });
-    }
-  }, [data, dispatch]);
-  console.log(isLoading, isFetching);
+  const onSuccess = (data: { transactions: transactionInterface[] }) => {
+    dispatch({ type: "SET_TRANSACTIONS", payload: data.transactions });
+  };
+
   if (isLoading) {
     return (
       <div className="loader">

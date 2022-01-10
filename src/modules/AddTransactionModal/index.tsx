@@ -1,4 +1,6 @@
 import React, { useContext, useEffect, useRef, useState } from "react";
+import { useMutation } from "react-query";
+import { addTransaction } from "../../api/transactions";
 import Button from "../../components/Button";
 import Modal from "../../components/Modal";
 import { TransactionContext } from "../../context/TransactionContextProvider";
@@ -12,6 +14,7 @@ const defaultTransactionDetail = {
 
 function AddTransactionModal() {
   const { state, dispatch } = useContext(TransactionContext);
+  const mutation = useMutation(addTransaction, { onSuccess: () => onClose() });
   const [transactionDetail, setTransactionDetail] = useState(
     defaultTransactionDetail
   );
@@ -39,12 +42,11 @@ function AddTransactionModal() {
     if (isDescriptionEmpty || isAmountEmpty) {
       return;
     }
-    dispatch({
-      type: "ADD_TRANSACTION",
-      payload: { ...transactionDetail, id: Date.now() },
-    });
-    setTransactionDetail(defaultTransactionDetail);
-    onClose();
+
+    mutation.mutate([
+      { ...transactionDetail, id: Date.now() },
+      ...state.transactions,
+    ]);
   };
 
   useEffect(() => {
@@ -95,7 +97,7 @@ function AddTransactionModal() {
       </div>
       <div>
         <Button type="button" onClick={handleAddClick}>
-          Add
+          {mutation.isLoading ? "Loading..." : "Add"}
         </Button>
       </div>
     </Modal>

@@ -1,4 +1,6 @@
 import React, { useContext } from "react";
+import { Mutation, useMutation, useQuery } from "react-query";
+import { addTransaction } from "../../api/transactions";
 import Button from "../../components/Button";
 import Modal from "../../components/Modal";
 import { TransactionContext } from "../../context/TransactionContextProvider";
@@ -9,12 +11,19 @@ type TransactionType = { transaction: transactionInterface | null };
 
 function TransactionDetailModal({ transaction }: TransactionType) {
   const { state, dispatch } = useContext(TransactionContext);
+  const mutation = useMutation(addTransaction, { onSuccess: () => onClose() });
+
+  const onDeleteTransaction = () => {
+    mutation.mutate([
+      ...state.transactions.filter(
+        (oldTransaction) => oldTransaction.id !== transaction?.id
+      ),
+    ]);
+  };
+
+  const onClose = () => dispatch({ type: "TOGGLE_DETAIL_MODAL" });
   return (
-    <Modal
-      open={state.showDetailModal}
-      handleClose={() => dispatch({ type: "TOGGLE_DETAIL_MODAL" })}
-      title="Details"
-    >
+    <Modal open={state.showDetailModal} handleClose={onClose} title="Details">
       <div className="fieldsContainer">
         <label>
           <strong>Date:</strong>
@@ -48,9 +57,12 @@ function TransactionDetailModal({ transaction }: TransactionType) {
           readOnly
         />
       </div>
-      <div>
+      <div className="buttonsContainer">
         <Button type="button" onClick={() => {}}>
           Save
+        </Button>
+        <Button type="button" onClick={onDeleteTransaction} isDeleteButton>
+          {mutation.isLoading ? "Loading..." : "Delete"}
         </Button>
       </div>
     </Modal>

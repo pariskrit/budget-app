@@ -15,7 +15,7 @@ function SidebarElement({
   path,
 }: sidebarelementType) {
   return (
-    <Link to={path}>
+    <Link to={path} className="link">
       <div className={`element ${selected ? "selected" : ""}`}>
         <Icon />
         <p>{title}</p>

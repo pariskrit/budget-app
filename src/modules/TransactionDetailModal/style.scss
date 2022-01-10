@@ -4,3 +4,7 @@
 .fieldsContainer {
   @include modalDesign;
 }
+
+.buttonsContainer {
+  @include flexWithJustify;
+}
