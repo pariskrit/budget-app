@@ -1,14 +1,17 @@
 import React from "react";
 import BalanceIncomeExpense from "../../modules/BalanceIncomeExpense";
 import BarPieChart from "../../modules/BarPieChart";
-import LatestTransactions from "../../modules/LatestTransactions";
+import AllTransactions from "../../modules/AllTransactions";
 import "./style.scss";
 
 function Overview() {
   return (
     <div className="container">
       <BalanceIncomeExpense />
-      <LatestTransactions />
+      <AllTransactions
+        title="Latest Transactions"
+        showAllTransactions={false}
+      />
       <BarPieChart />
     </div>
   );

@@ -2,8 +2,10 @@ import React from "react";
 import SidebarElement from "../../components/SidebarElement";
 import { AiOutlineMenu } from "react-icons/ai";
 import "./style.scss";
+import { useLocation } from "react-router-dom";
 
 function Siderbar() {
+  const { pathname } = useLocation();
   return (
     <div className="sidebar">
       <div className="header">
@@ -14,14 +16,20 @@ function Siderbar() {
           Icon={AiOutlineMenu}
           title="Overview"
           path="/overview"
-          selected
+          selected={pathname === "/overview" || pathname === "/"}
         />
         <SidebarElement
           Icon={AiOutlineMenu}
           title="Transactions"
           path="/transactions"
+          selected={pathname === "/transactions"}
         />
-        <SidebarElement Icon={AiOutlineMenu} title="Overview" path="" />
+        <SidebarElement
+          Icon={AiOutlineMenu}
+          title="Overview"
+          path=""
+          selected={pathname === "/settings"}
+        />
       </div>
     </div>
   );

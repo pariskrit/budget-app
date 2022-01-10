@@ -1,4 +1,5 @@
 import React, { useContext, useState } from "react";
+import { useNavigate } from "react-router-dom";
 import TransactionDetailRow from "../../components/TransactionDetailRow";
 import { TransactionContext } from "../../context/TransactionContextProvider";
 import TransactionDetailModal from "../TransactionDetailModal";
@@ -11,8 +12,15 @@ export interface transactionInterface {
   amount: number;
 }
 
-function LatestTransactions() {
+function AllTransactions({
+  title,
+  showAllTransactions,
+}: {
+  title: string;
+  showAllTransactions: boolean;
+}) {
   const { state, dispatch } = useContext(TransactionContext);
+  let navigate = useNavigate();
   const [selectedTransaction, setSelectedTransaction] =
     useState<transactionInterface>({
       id: 0,
@@ -26,17 +34,23 @@ function LatestTransactions() {
     setSelectedTransaction(transaction);
   };
 
+  const goToTransactionsPage = () => navigate("/transactions");
+
+  const transactions = showAllTransactions
+    ? state.transactions
+    : state.transactions.slice(0, 3);
+
   return (
     <>
       <TransactionDetailModal transaction={selectedTransaction} />
       <div className="latesttransactions">
         <div className="latesttransactions_headercontainer">
-          <strong className="latesttransactions_header">
-            Latest Transactions
-          </strong>
-          <p>view all</p>
+          <strong className="latesttransactions_header">{title}</strong>
+          {!showAllTransactions ? (
+            <p onClick={goToTransactionsPage}>view all</p>
+          ) : null}
         </div>
-        {state.transactions.slice(0, 3).map((detail) => (
+        {transactions.map((detail) => (
           <TransactionDetailRow
             key={detail.id}
             transaction={detail}
@@ -48,4 +62,4 @@ function LatestTransactions() {
   );
 }
 
-export default LatestTransactions;
+export default AllTransactions;

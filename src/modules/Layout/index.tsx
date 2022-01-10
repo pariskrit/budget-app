@@ -8,7 +8,7 @@ import loader from "../../assets/loader.gif";
 import { fetchTransactions } from "../../api/transactions";
 import { useQuery } from "react-query";
 import { TransactionContext } from "../../context/TransactionContextProvider";
-import { transactionInterface } from "../LatestTransactions";
+import { transactionInterface } from "../AllTransactions";
 import { Outlet } from "react-router-dom";
 
 function Layout() {

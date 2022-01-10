@@ -2,7 +2,7 @@ import React, { useContext } from "react";
 import Button from "../../components/Button";
 import Modal from "../../components/Modal";
 import { TransactionContext } from "../../context/TransactionContextProvider";
-import { transactionInterface } from "../LatestTransactions";
+import { transactionInterface } from "../AllTransactions";
 import "./style.scss";
 
 type TransactionType = { transaction: transactionInterface | null };

@@ -1,5 +1,5 @@
 import React from "react";
-import { transactionInterface } from "../../modules/LatestTransactions";
+import { transactionInterface } from "../../modules/AllTransactions";
 import "./style.scss";
 
 interface transactionDetailInterface {

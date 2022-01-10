@@ -1,4 +1,4 @@
-import { transactionInterface } from "../modules/LatestTransactions";
+import { transactionInterface } from "../modules/AllTransactions";
 
 export interface reducerStateInterface {
   showAddModal: boolean;
