@@ -5,6 +5,8 @@ import App from "./App";
 import reportWebVitals from "./reportWebVitals";
 import { QueryClient, QueryClientProvider } from "react-query";
 import TransactionContextProvider from "./context/TransactionContextProvider";
+import { ReactQueryDevtools } from "react-query/devtools";
+
 const queryClient = new QueryClient();
 
 ReactDOM.render(
@@ -13,6 +15,7 @@ ReactDOM.render(
       <TransactionContextProvider>
         <App />
       </TransactionContextProvider>
+      <ReactQueryDevtools initialIsOpen={false} />
     </QueryClientProvider>
   </React.StrictMode>,
   document.getElementById("root")

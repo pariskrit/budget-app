@@ -1,9 +1,9 @@
 import React, { useContext, useEffect, useRef, useState } from "react";
-import { useMutation } from "react-query";
-import { addTransaction } from "../../api/transactions";
 import Button from "../../components/Button";
 import Modal from "../../components/Modal";
+import { months } from "../../constants";
 import { TransactionContext } from "../../context/TransactionContextProvider";
+import { useMutateTransaction } from "../../hooks/useMutateTransaction";
 import "./style.scss";
 
 const defaultTransactionDetail = {
@@ -14,11 +14,11 @@ const defaultTransactionDetail = {
 
 function AddTransactionModal() {
   const { state, dispatch } = useContext(TransactionContext);
-  const mutation = useMutation(addTransaction, { onSuccess: () => onClose() });
   const [transactionDetail, setTransactionDetail] = useState(
     defaultTransactionDetail
   );
   let inputRef = useRef<HTMLInputElement>(null);
+  const mutation = useMutateTransaction(() => onClose());
 
   const onClose = () => {
     setTransactionDetail(defaultTransactionDetail);
@@ -43,10 +43,15 @@ function AddTransactionModal() {
       return;
     }
 
-    mutation.mutate([
-      { ...transactionDetail, id: Date.now() },
-      ...state.transactions,
-    ]);
+    const monthlyExpense = [...state.monthlyExpenses];
+
+    mutation.mutate({
+      monthlyExpenses: [{ month: months[new Date().getMonth()], amount: 2050 }],
+      transactions: [
+        { ...transactionDetail, id: Date.now() },
+        ...state.transactions,
+      ],
+    });
   };
 
   useEffect(() => {

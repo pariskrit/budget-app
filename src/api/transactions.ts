@@ -11,11 +11,12 @@ export const fetchTransactions = async () => {
   }
 };
 
-export const addTransaction = async (transactions: transactionInterface[]) => {
+export const updateTransaction = async (payload: {
+  monthlyExpenses: any[];
+  transactions: transactionInterface[];
+}) => {
   try {
-    const response = await setDoc(doc(db, "transactions", "first"), {
-      transactions,
-    });
+    const response = await setDoc(doc(db, "transactions", "first"), payload);
     return response;
   } catch (error) {
     return error;

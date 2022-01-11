@@ -7,6 +7,7 @@ export interface reducerStateInterface {
   transactions: transactionInterface[];
   totalIncome: number;
   expense: number;
+  monthlyExpenses: any[];
 }
 
 export const defaultReducerState = {
@@ -14,6 +15,7 @@ export const defaultReducerState = {
   showDetailModal: false,
   showIncomeModal: false,
   transactions: [],
+  monthlyExpenses: [],
   totalIncome: 0,
   expense: 950,
 };
@@ -24,7 +26,10 @@ export type actionType =
   | { type: "TOGGLE_INCOME_MODAL" }
   | { type: "ADD_TRANSACTION"; payload: transactionInterface }
   | { type: "ADD_INCOME"; payload: number }
-  | { type: "SET_TRANSACTIONS"; payload: transactionInterface[] };
+  | {
+      type: "SET_TRANSACTIONS";
+      payload: { monthlyExpenses: any[]; transactions: transactionInterface[] };
+    };
 
 export const reducer = (state: reducerStateInterface, action: actionType) => {
   const { showAddModal, showDetailModal, showIncomeModal, transactions } =
@@ -45,7 +50,9 @@ export const reducer = (state: reducerStateInterface, action: actionType) => {
     case "SET_TRANSACTIONS":
       return {
         ...state,
-        transactions: action.payload,
+
+        monthlyExpenses: action.payload.monthlyExpenses,
+        transactions: action.payload.transactions,
       };
     case "ADD_TRANSACTION":
       return {

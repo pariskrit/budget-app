@@ -46,6 +46,7 @@ function BarPieChart() {
     tempExpenses[monthlyExpenses.length - 1].expense = state.expense;
     setMonthlyExpenses(tempExpenses);
   }, [state.expense]);
+  console.log(state);
   return (
     <div className="barchart">
       <BarChart width={800} height={250} data={monthlyExpenses} barSize={50}>

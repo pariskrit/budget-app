@@ -16,14 +16,25 @@ function Layout() {
     "transactions",
     fetchTransactions,
     {
-      onSuccess: (data: { transactions: transactionInterface[] }) =>
-        onSuccess(data),
+      onSuccess: (data: {
+        transactions: transactionInterface[];
+        monthlyExpenses: any[];
+      }) => onSuccess(data),
     }
   );
   const { state, dispatch } = useContext(TransactionContext);
 
-  const onSuccess = (data: { transactions: transactionInterface[] }) => {
-    dispatch({ type: "SET_TRANSACTIONS", payload: data.transactions });
+  const onSuccess = (data: {
+    transactions: transactionInterface[];
+    monthlyExpenses: any[];
+  }) => {
+    dispatch({
+      type: "SET_TRANSACTIONS",
+      payload: {
+        monthlyExpenses: data.monthlyExpenses,
+        transactions: data.transactions,
+      },
+    });
   };
 
   if (isLoading) {
