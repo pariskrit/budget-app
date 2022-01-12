@@ -17,7 +17,7 @@ export const defaultReducerState = {
   transactions: [],
   monthlyExpenses: [],
   totalIncome: 0,
-  expense: 950,
+  expense: 0,
 };
 
 export type actionType =
@@ -53,14 +53,16 @@ export const reducer = (state: reducerStateInterface, action: actionType) => {
 
         monthlyExpenses: action.payload.monthlyExpenses,
         transactions: action.payload.transactions,
+        expense: action.payload.transactions.reduce(
+          (acc, curr) => curr.amount + acc,
+          0
+        ),
       };
     case "ADD_TRANSACTION":
       return {
         ...state,
         transactions: [action.payload, ...transactions],
-        expense:
-          state.transactions.reduce((acc, curr) => curr.amount + acc, 0) +
-          action.payload.amount,
+        expense: state.expense + action.payload.amount,
       };
 
     default:

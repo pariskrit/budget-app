@@ -1,6 +1,7 @@
 import React, { useContext } from "react";
 import Button from "../../components/Button";
 import Modal from "../../components/Modal";
+import { months } from "../../constants";
 import { TransactionContext } from "../../context/TransactionContextProvider";
 import { useMutateTransaction } from "../../hooks/useMutateTransaction";
 import { transactionInterface } from "../AllTransactions";
@@ -13,8 +14,18 @@ function TransactionDetailModal({ transaction }: TransactionType) {
   const mutation = useMutateTransaction(() => onClose());
 
   const onDeleteTransaction = () => {
+    const updatedMonthlyExpense = [
+      ...state.monthlyExpenses.map((monthlyExpense) =>
+        monthlyExpense.month === months[new Date().getMonth()]
+          ? {
+              ...monthlyExpense,
+              amount: monthlyExpense.amount - +transaction!.amount,
+            }
+          : monthlyExpense
+      ),
+    ];
     mutation.mutate({
-      monthlyExpenses: [],
+      monthlyExpenses: updatedMonthlyExpense,
       transactions: [
         ...state.transactions.filter(
           (oldTransaction) => oldTransaction.id !== transaction?.id
