@@ -43,10 +43,18 @@ function AddTransactionModal() {
       return;
     }
 
-    const monthlyExpense = [...state.monthlyExpenses];
-
+    const updatedMonthlyExpense = [
+      ...state.monthlyExpenses.map((monthlyExpense) =>
+        monthlyExpense.month === months[new Date().getMonth()]
+          ? {
+              ...monthlyExpense,
+              amount: monthlyExpense.amount + +transactionDetail.amount,
+            }
+          : monthlyExpense
+      ),
+    ];
     mutation.mutate({
-      monthlyExpenses: [{ month: months[new Date().getMonth()], amount: 2050 }],
+      monthlyExpenses: updatedMonthlyExpense,
       transactions: [
         { ...transactionDetail, id: Date.now() },
         ...state.transactions,

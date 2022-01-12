@@ -36,7 +36,6 @@ function Layout() {
       },
     });
   };
-
   if (isLoading) {
     return (
       <div className="loader">
