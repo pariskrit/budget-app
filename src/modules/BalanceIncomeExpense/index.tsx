@@ -5,11 +5,17 @@ import { GiReceiveMoney } from "react-icons/gi";
 import IconWithTexts from "../../components/IconWithTexts";
 import { TransactionContext } from "../../context/TransactionContextProvider";
 import { months } from "../../constants";
+import { addCommaInNumbers } from "../../helpers";
 
 const currentMonth = months[new Date().getMonth()];
 
 function BalanceIncomeExpense() {
   const { state, dispatch } = useContext(TransactionContext);
+
+  const totalIncome = addCommaInNumbers(state.income);
+  const totalExpense = addCommaInNumbers(state.expense);
+
+  const balance = addCommaInNumbers(state.income - state.expense);
 
   return (
     <div className="balanceincomeexpense">
@@ -18,7 +24,7 @@ function BalanceIncomeExpense() {
         <IconWithTexts
           Icon={GiPayMoney}
           primaryText="Balance"
-          secondaryText={`Rs ${state.income - state.expense}`}
+          secondaryText={`Rs ${balance}`}
           showIcon={false}
         />
       </div>
@@ -26,12 +32,12 @@ function BalanceIncomeExpense() {
         <IconWithTexts
           Icon={GiPayMoney}
           primaryText="Expense"
-          secondaryText={`Rs ${state.expense}`}
+          secondaryText={`Rs ${totalExpense}`}
         />
         <IconWithTexts
           Icon={GiReceiveMoney}
           primaryText="Income"
-          secondaryText={`Rs ${state.income}`}
+          secondaryText={`Rs ${totalIncome}`}
         />
       </div>
     </div>

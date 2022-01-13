@@ -1,4 +1,4 @@
-import React, { useContext } from "react";
+import React, { useContext, useEffect, useState } from "react";
 import Button from "../../components/Button";
 import Modal from "../../components/Modal";
 import { months } from "../../constants";
@@ -12,6 +12,9 @@ type TransactionType = { transaction: transactionInterface | null };
 function TransactionDetailModal({ transaction }: TransactionType) {
   const { state, dispatch } = useContext(TransactionContext);
   const mutation = useMutateTransaction(() => onClose());
+  const [transactionToEdit, setTransactionToEdit] =
+    useState<transactionInterface | null>(null);
+  const [disabled, setDisabled] = useState(true);
 
   const onDeleteTransaction = () => {
     const updatedMonthlyExpense = [
@@ -35,7 +38,39 @@ function TransactionDetailModal({ transaction }: TransactionType) {
     });
   };
 
+  const onUpdateTransaction = () =>
+    mutation.mutate({
+      income: state.income,
+      monthlyExpenses: state.monthlyExpenses,
+      transactions: [
+        ...state.transactions.map((transaction) =>
+          transaction.id === transactionToEdit?.id
+            ? transactionToEdit
+            : transaction
+        ),
+      ],
+    });
+
   const onClose = () => dispatch({ type: "TOGGLE_DETAIL_MODAL" });
+
+  const onInputChange = (e: React.ChangeEvent) => {
+    setDisabled(false);
+    setTransactionToEdit({
+      ...transactionToEdit!,
+      [(e.target as HTMLInputElement).name]: (e.target as HTMLInputElement)
+        .value,
+    });
+  };
+
+  useEffect(() => {
+    if (!disabled) {
+      setDisabled(true);
+    }
+    if (Object.values(transaction!).length) {
+      setTransactionToEdit(transaction);
+    }
+  }, [transaction]);
+
   return (
     <Modal open={state.showDetailModal} handleClose={onClose} title="Details">
       <div className="fieldsContainer">
@@ -54,8 +89,8 @@ function TransactionDetailModal({ transaction }: TransactionType) {
           type="text"
           placeholder="description"
           name="description"
-          value={transaction?.description}
-          readOnly
+          value={transactionToEdit?.description}
+          onChange={onInputChange}
         />
       </div>
       <div className="fieldsContainer">
@@ -67,13 +102,13 @@ function TransactionDetailModal({ transaction }: TransactionType) {
           type="number"
           placeholder="amount"
           name="amount"
-          value={transaction?.amount}
-          readOnly
+          value={transactionToEdit?.amount}
+          onChange={onInputChange}
         />
       </div>
       <div className="buttonsContainer">
-        <Button type="button" onClick={() => {}}>
-          Save
+        <Button type="button" onClick={onUpdateTransaction} disabled={disabled}>
+          {mutation.isLoading ? "Loading..." : "Save"}
         </Button>
         <Button type="button" onClick={onDeleteTransaction} isDeleteButton>
           {mutation.isLoading ? "Loading..." : "Delete"}

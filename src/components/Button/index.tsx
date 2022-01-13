@@ -6,6 +6,7 @@ interface buttonType {
   type: "button" | "submit";
   onClick: (e: React.MouseEvent<HTMLButtonElement>) => void;
   isDeleteButton?: boolean;
+  disabled?: boolean;
 }
 function Button({ children, isDeleteButton, ...rest }: buttonType) {
   return (

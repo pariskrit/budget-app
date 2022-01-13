@@ -12,10 +12,15 @@
   transition: border 0.3s ease-out;
   border: 1px solid $primaryColor;
 
+  &:disabled {
+    cursor: not-allowed;
+    opacity: 0.8;
+    border: none;
+  }
+
   &:hover {
     border: 1px solid white;
   }
-
   &:active {
     margin-top: 3px;
   }
