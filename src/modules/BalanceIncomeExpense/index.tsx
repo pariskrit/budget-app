@@ -18,7 +18,7 @@ function BalanceIncomeExpense() {
         <IconWithTexts
           Icon={GiPayMoney}
           primaryText="Balance"
-          secondaryText={`Rs ${state.totalIncome - state.expense}`}
+          secondaryText={`Rs ${state.income - state.expense}`}
           showIcon={false}
         />
       </div>
@@ -31,7 +31,7 @@ function BalanceIncomeExpense() {
         <IconWithTexts
           Icon={GiReceiveMoney}
           primaryText="Income"
-          secondaryText={`Rs ${state.totalIncome}`}
+          secondaryText={`Rs ${state.income}`}
         />
       </div>
     </div>

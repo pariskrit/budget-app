@@ -12,6 +12,7 @@ export const fetchTransactions = async () => {
 };
 
 export const updateTransaction = async (payload: {
+  income: number;
   monthlyExpenses: any[];
   transactions: transactionInterface[];
 }) => {

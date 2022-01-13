@@ -3,17 +3,25 @@ import { AiOutlineConsoleSql } from "react-icons/ai";
 import Button from "../../components/Button";
 import Modal from "../../components/Modal";
 import { TransactionContext } from "../../context/TransactionContextProvider";
+import { useMutateTransaction } from "../../hooks/useMutateTransaction";
 
 function AddIncomeModal() {
   const { state, dispatch } = useContext(TransactionContext);
   const [income, setIncome] = useState<number | undefined>(undefined);
+  const mutation = useMutateTransaction(() => {
+    dispatch({ type: "ADD_INCOME", payload: income as number });
+    setIncome(0);
+    closeModal();
+  });
   const inputRef = useRef<HTMLInputElement>(null);
 
   const closeModal = () => dispatch({ type: "TOGGLE_INCOME_MODAL" });
   const handleAddClick = () => {
-    dispatch({ type: "ADD_INCOME", payload: income as number });
-    setIncome(0);
-    closeModal();
+    mutation.mutate({
+      transactions: state.transactions,
+      monthlyExpenses: state.monthlyExpenses,
+      income: income!,
+    });
   };
 
   useEffect(() => {
@@ -51,7 +59,7 @@ function AddIncomeModal() {
       </div>
       <div>
         <Button type="button" onClick={handleAddClick}>
-          Add
+          {mutation.isLoading ? "Loading..." : "Add"}
         </Button>
       </div>
     </Modal>

@@ -1,13 +1,15 @@
 import { transactionInterface } from "../modules/AllTransactions";
 
-export interface reducerStateInterface {
+export interface responseDataInterface {
+  transactions: transactionInterface[];
+  income: number;
+  monthlyExpenses: any[];
+}
+export interface reducerStateInterface extends responseDataInterface {
   showAddModal: boolean;
   showDetailModal: boolean;
   showIncomeModal: boolean;
-  transactions: transactionInterface[];
-  totalIncome: number;
   expense: number;
-  monthlyExpenses: any[];
 }
 
 export const defaultReducerState = {
@@ -16,7 +18,7 @@ export const defaultReducerState = {
   showIncomeModal: false,
   transactions: [],
   monthlyExpenses: [],
-  totalIncome: 0,
+  income: 0,
   expense: 0,
 };
 
@@ -28,7 +30,7 @@ export type actionType =
   | { type: "ADD_INCOME"; payload: number }
   | {
       type: "SET_TRANSACTIONS";
-      payload: { monthlyExpenses: any[]; transactions: transactionInterface[] };
+      payload: responseDataInterface;
     };
 
 export const reducer = (state: reducerStateInterface, action: actionType) => {
@@ -45,12 +47,12 @@ export const reducer = (state: reducerStateInterface, action: actionType) => {
       return { ...state, showIncomeModal: !showIncomeModal };
 
     case "ADD_INCOME":
-      return { ...state, totalIncome: action.payload };
+      return { ...state, income: action.payload };
 
     case "SET_TRANSACTIONS":
       return {
         ...state,
-
+        income: action.payload.income,
         monthlyExpenses: action.payload.monthlyExpenses,
         transactions: action.payload.transactions,
         expense: action.payload.transactions.reduce(

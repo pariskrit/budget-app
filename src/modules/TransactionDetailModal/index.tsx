@@ -25,6 +25,7 @@ function TransactionDetailModal({ transaction }: TransactionType) {
       ),
     ];
     mutation.mutate({
+      income: state.income,
       monthlyExpenses: updatedMonthlyExpense,
       transactions: [
         ...state.transactions.filter(

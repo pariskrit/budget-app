@@ -8,31 +8,26 @@ import loader from "../../assets/loader.gif";
 import { fetchTransactions } from "../../api/transactions";
 import { useQuery } from "react-query";
 import { TransactionContext } from "../../context/TransactionContextProvider";
-import { transactionInterface } from "../AllTransactions";
 import { Outlet } from "react-router-dom";
+import { responseDataInterface } from "../../context/reducer";
 
 function Layout() {
   const { isLoading, isFetching } = useQuery(
     "transactions",
     fetchTransactions,
     {
-      onSuccess: (data: {
-        transactions: transactionInterface[];
-        monthlyExpenses: any[];
-      }) => onSuccess(data),
+      onSuccess: (data: responseDataInterface) => onSuccess(data),
     }
   );
   const { state, dispatch } = useContext(TransactionContext);
 
-  const onSuccess = (data: {
-    transactions: transactionInterface[];
-    monthlyExpenses: any[];
-  }) => {
+  const onSuccess = (data: responseDataInterface) => {
     dispatch({
       type: "SET_TRANSACTIONS",
       payload: {
         monthlyExpenses: data.monthlyExpenses,
         transactions: data.transactions,
+        income: data.income,
       },
     });
   };

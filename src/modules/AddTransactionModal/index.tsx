@@ -54,6 +54,7 @@ function AddTransactionModal() {
       ),
     ];
     mutation.mutate({
+      income: state.income,
       monthlyExpenses: updatedMonthlyExpense,
       transactions: [
         { ...transactionDetail, id: Date.now() },
