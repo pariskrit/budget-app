@@ -4,10 +4,13 @@ import Modal from "../../components/Modal";
 import { months } from "../../constants";
 import { TransactionContext } from "../../context/TransactionContextProvider";
 import { useMutateTransaction } from "../../hooks/useMutateTransaction";
+import DatePicker from "react-datepicker";
+import "react-datepicker/dist/react-datepicker.css";
 import "./style.scss";
+import { formatDate } from "../../helpers";
 
 const defaultTransactionDetail = {
-  date: `${new Date().getDate()} January 2022`,
+  date: "",
   description: "",
   amount: 0,
 };
@@ -18,6 +21,7 @@ function AddTransactionModal() {
     defaultTransactionDetail
   );
   let inputRef = useRef<HTMLInputElement>(null);
+  const [selectedDate, setSelectedDate] = useState(new Date());
   const mutation = useMutateTransaction(() => onClose());
 
   const onClose = () => {
@@ -57,7 +61,11 @@ function AddTransactionModal() {
       income: state.income,
       monthlyExpenses: updatedMonthlyExpense,
       transactions: [
-        { ...transactionDetail, id: Date.now() },
+        {
+          ...transactionDetail,
+          id: Date.now(),
+          date: formatDate(selectedDate),
+        },
         ...state.transactions,
       ],
     });
@@ -80,7 +88,10 @@ function AddTransactionModal() {
           <strong>Date:</strong>
         </label>
         <br />
-        <span>{`${new Date().getDate()} January 2022`}</span>
+        <DatePicker
+          selected={selectedDate}
+          onChange={(date: Date) => setSelectedDate(date)}
+        />
       </div>
       <div className="fieldsContainer">
         <label>

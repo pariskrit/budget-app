@@ -1,5 +1,6 @@
+import { months } from "../constants";
+
 export const addCommaInNumbers = (number) => {
-  console.log(number, typeof number);
   let numberInStringArray = String(number).split("");
 
   switch (numberInStringArray.length) {
@@ -23,4 +24,9 @@ export const addCommaInNumbers = (number) => {
     default:
       return number;
   }
+};
+
+export const formatDate = (date) => {
+  console.log(date);
+  return `${date.getDate()} ${months[date.getMonth()]} 2022`;
 };

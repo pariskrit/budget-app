@@ -5,12 +5,17 @@ import { months } from "../../constants";
 import { TransactionContext } from "../../context/TransactionContextProvider";
 import { useMutateTransaction } from "../../hooks/useMutateTransaction";
 import { transactionInterface } from "../AllTransactions";
+import DatePicker from "react-datepicker";
+import "react-datepicker/dist/react-datepicker.css";
 import "./style.scss";
+import { formatDate } from "../../helpers";
 
 type TransactionType = { transaction: transactionInterface | null };
 
 function TransactionDetailModal({ transaction }: TransactionType) {
   const { state, dispatch } = useContext(TransactionContext);
+  const [selectedDate, setSelectedDate] = useState(new Date());
+
   const mutation = useMutateTransaction(() => onClose());
   const [transactionToEdit, setTransactionToEdit] =
     useState<transactionInterface | null>(null);
@@ -45,7 +50,7 @@ function TransactionDetailModal({ transaction }: TransactionType) {
       transactions: [
         ...state.transactions.map((transaction) =>
           transaction.id === transactionToEdit?.id
-            ? transactionToEdit
+            ? { ...transactionToEdit, date: formatDate(selectedDate) }
             : transaction
         ),
       ],
@@ -67,10 +72,20 @@ function TransactionDetailModal({ transaction }: TransactionType) {
       setDisabled(true);
     }
     if (Object.values(transaction!).length) {
+      const dateArray = transaction?.date.split(" ");
+
+      if (dateArray?.length) {
+        setSelectedDate(
+          new Date(
+            2022,
+            months.findIndex((month) => dateArray[1] === month),
+            +dateArray[0]
+          )
+        );
+      }
       setTransactionToEdit(transaction);
     }
   }, [transaction]);
-
   return (
     <Modal open={state.showDetailModal} handleClose={onClose} title="Details">
       <div className="fieldsContainer">
@@ -78,7 +93,13 @@ function TransactionDetailModal({ transaction }: TransactionType) {
           <strong>Date:</strong>
         </label>
         <br />
-        <span>{transaction?.date}</span>
+        <DatePicker
+          selected={selectedDate}
+          onChange={(date: Date) => {
+            setSelectedDate(date);
+            setDisabled(false);
+          }}
+        />
       </div>
       <div className="fieldsContainer">
         <label>
