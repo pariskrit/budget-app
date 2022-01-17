@@ -25,17 +25,25 @@ function BarPieChart() {
 
   return (
     <div className="barchart">
-      <BarChart width={800} height={250} data={barData} barSize={50}>
+      <BarChart
+        width={800}
+        height={250}
+        data={barData}
+        margin={{
+          top: 18,
+          right: 30,
+          left: 30,
+          bottom: 1,
+        }}
+      >
         <CartesianGrid strokeDasharray="3 3" />
         <XAxis dataKey="month" />
-        <YAxis dataKey="amount" />
+        <YAxis />
         <Tooltip />
         <Legend />
         <Bar dataKey="amount" fill="#ffff">
           <LabelList dataKey="amount" position="top" fill="white" />
         </Bar>
-
-        {/* <Bar dataKey="month" fill="#ffff" label={{ fill: "black" }} /> */}
       </BarChart>
     </div>
   );

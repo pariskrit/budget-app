@@ -24,12 +24,6 @@ function Siderbar() {
           path="/transactions"
           selected={pathname === "/transactions"}
         />
-        <SidebarElement
-          Icon={AiOutlineMenu}
-          title="Overview"
-          path=""
-          selected={pathname === "/settings"}
-        />
       </div>
     </div>
   );
