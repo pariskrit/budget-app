@@ -1,4 +1,5 @@
 import React from "react";
+import { addCommaInNumbers } from "../../helpers";
 import { transactionInterface } from "../../modules/AllTransactions";
 import "./style.scss";
 
@@ -20,7 +21,7 @@ function TransactionDetailRow({
 
           <p>{date}</p>
         </div>
-        <p>-{amount}.00</p>
+        <p>-{addCommaInNumbers(amount)}.00</p>
       </div>
     </div>
   );

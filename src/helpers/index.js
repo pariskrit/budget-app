@@ -3,6 +3,10 @@ import { months } from "../constants";
 export const addCommaInNumbers = (number) => {
   let numberInStringArray = String(number).split("");
 
+  if (numberInStringArray[0] === "-") {
+    numberInStringArray.splice(0, 1);
+  }
+
   switch (numberInStringArray.length) {
     case 4:
       const slicedArray = numberInStringArray.splice(0, 1);
@@ -19,6 +23,7 @@ export const addCommaInNumbers = (number) => {
         ",",
         ...numberInStringArray,
       ].join("");
+      // console.log(slicedArrayWithTwoDigit, numberInStringArray);
       return numberWithComma1;
 
     default:
@@ -27,6 +32,5 @@ export const addCommaInNumbers = (number) => {
 };
 
 export const formatDate = (date) => {
-  console.log(date);
   return `${date.getDate()} ${months[date.getMonth()]} 2022`;
 };
