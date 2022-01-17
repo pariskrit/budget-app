@@ -11,7 +11,7 @@ function Siderbar() {
       <div className="header">
         <h1>BUDGET TRACK</h1>
       </div>
-      <div>
+      <div className="sidebar_elements">
         <SidebarElement
           Icon={AiOutlineMenu}
           title="Overview"
