@@ -10,6 +10,7 @@ export interface transactionInterface {
   description: string;
   date: string;
   amount: number;
+  type: string;
 }
 
 function AllTransactions({
@@ -27,6 +28,7 @@ function AllTransactions({
       description: "",
       date: "",
       amount: 0,
+      type: "",
     });
 
   const handleTransactionRowClick = (transaction: transactionInterface) => {

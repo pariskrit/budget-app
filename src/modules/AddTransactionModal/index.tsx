@@ -13,6 +13,7 @@ const defaultTransactionDetail = {
   date: "",
   description: "",
   amount: 0,
+  type: "",
 };
 
 function AddTransactionModal() {
@@ -30,7 +31,9 @@ function AddTransactionModal() {
     dispatch({ type: "TOGGLE_ADD_MODAL" });
   };
 
-  const handleInputChange = (e: React.ChangeEvent<HTMLInputElement>) =>
+  const handleInputChange = (
+    e: React.ChangeEvent<HTMLInputElement | HTMLSelectElement>
+  ) =>
     setTransactionDetail({
       ...transactionDetail,
       [e.target.name]:
@@ -39,11 +42,12 @@ function AddTransactionModal() {
 
   const handleAddClick = () => {
     const isDescriptionEmpty = transactionDetail.description === "";
+    const isTypeEmpty = transactionDetail.type === "";
     const isAmountEmpty =
       transactionDetail.amount === 0 ||
       transactionDetail.amount.toString() === "";
 
-    if (isDescriptionEmpty || isAmountEmpty) {
+    if (isDescriptionEmpty || isAmountEmpty || isTypeEmpty) {
       return;
     }
 
@@ -92,6 +96,23 @@ function AddTransactionModal() {
           selected={selectedDate}
           onChange={(date: Date) => setSelectedDate(date)}
         />
+      </div>
+      <div className="fieldsContainer">
+        <label>
+          <strong>Type:</strong>
+        </label>
+        <br />
+        <select
+          name="type"
+          value={transactionDetail.type}
+          onChange={handleInputChange}
+        >
+          <option selected value="" disabled>
+            Type
+          </option>
+          <option value="personal">Personal</option>
+          <option value="home">Home</option>
+        </select>
       </div>
       <div className="fieldsContainer">
         <label>

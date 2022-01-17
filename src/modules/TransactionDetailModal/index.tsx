@@ -58,12 +58,13 @@ function TransactionDetailModal({ transaction }: TransactionType) {
 
   const onClose = () => dispatch({ type: "TOGGLE_DETAIL_MODAL" });
 
-  const onInputChange = (e: React.ChangeEvent) => {
+  const onInputChange = (
+    e: React.ChangeEvent<HTMLInputElement | HTMLSelectElement>
+  ) => {
     setDisabled(false);
     setTransactionToEdit({
       ...transactionToEdit!,
-      [(e.target as HTMLInputElement).name]: (e.target as HTMLInputElement)
-        .value,
+      [e.target.name]: e.target.value,
     });
   };
 
@@ -72,6 +73,7 @@ function TransactionDetailModal({ transaction }: TransactionType) {
       setDisabled(true);
     }
     if (Object.values(transaction!).length) {
+      // changing string date to Date type
       const dateArray = transaction?.date.split(" ");
 
       if (dateArray?.length) {
@@ -100,6 +102,23 @@ function TransactionDetailModal({ transaction }: TransactionType) {
             setDisabled(false);
           }}
         />
+      </div>
+      <div className="fieldsContainer">
+        <label>
+          <strong>Type:</strong>
+        </label>
+        <br />
+        <select
+          name="type"
+          value={transactionToEdit?.type ?? ""}
+          onChange={onInputChange}
+        >
+          <option selected value="" disabled>
+            Type
+          </option>
+          <option value="personal">Personal</option>
+          <option value="home">Home</option>
+        </select>
       </div>
       <div className="fieldsContainer">
         <label>
