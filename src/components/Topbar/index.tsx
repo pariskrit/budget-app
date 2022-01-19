@@ -1,12 +1,42 @@
-import React, { useContext } from "react";
+import React, { useContext, useEffect, useRef, useState } from "react";
 import "./style.scss";
 import { IoNotificationsOutline } from "react-icons/io5";
 import { AiOutlineUser, AiOutlineCaretDown } from "react-icons/ai";
 import Button from "../Button";
 import { TransactionContext } from "../../context/TransactionContextProvider";
+import { getAuth, signOut } from "firebase/auth";
+import { useNavigate } from "react-router-dom";
 
 function Topbar() {
   const { state, dispatch } = useContext(TransactionContext);
+  const [showDropdown, setShowDropdown] = useState(false);
+  const auth = getAuth();
+  const navigate = useNavigate();
+  const logoutRef = useRef<HTMLDivElement>(null);
+
+  const toggleLogoutDropdown = () => setShowDropdown(true);
+
+  const onLogout = () => {
+    signOut(auth)
+      .then(() => {
+        localStorage.removeItem("id");
+        navigate("/login");
+      })
+      .catch((error) => console.log(error));
+  };
+
+  useEffect(() => {
+    const logoutOpenBlock = document.querySelector(".topbar_rightside_right");
+    document.addEventListener("click", (e) => {
+      if (
+        !logoutRef.current!.contains(e.target as Node) &&
+        !logoutOpenBlock?.contains(e.target as Node)
+      ) {
+        setShowDropdown(false);
+      }
+    });
+  }, []);
+
   return (
     <div className="topbar">
       <div>
@@ -30,13 +60,25 @@ function Topbar() {
         <IoNotificationsOutline className="icon" />
         <div className="topbar_userdetail">
           <AiOutlineUser className="icon" />
-          <div className="topbar_rightside_right">
-            <p>Pariskrit</p>
-            <p className="topbar_date">User</p>
+          <div
+            className="topbar_rightside_right"
+            onClick={toggleLogoutDropdown}
+          >
+            <div>
+              <p>Pariskrit</p>
+              <p className="topbar_date">User</p>
+            </div>
+            <AiOutlineCaretDown />
           </div>
-          <AiOutlineCaretDown />
         </div>
       </div>
+      {showDropdown && (
+        <div className="logout_dropdown" ref={logoutRef} onClick={onLogout}>
+          <ul>
+            <li>Log out</li>
+          </ul>
+        </div>
+      )}
     </div>
   );
 }
