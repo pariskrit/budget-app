@@ -38,3 +38,5 @@ export const addCommaInNumbers = (number) => {
 export const formatDate = (date) => {
   return `${date.getDate()} ${months[date.getMonth()]} 2022`;
 };
+
+export const currentUserId = () => localStorage.getItem("id");

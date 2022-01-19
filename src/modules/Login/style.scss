@@ -14,6 +14,10 @@
   background-color: #645f5f;
 
   @include modalDesign;
+
+  input {
+    width: 93%;
+  }
 }
 
 .login_icon_container {
@@ -28,4 +32,8 @@
 .login_buttons {
   @include flexWithJustify;
   margin: 10px 0;
+
+  a {
+    color: white;
+  }
 }

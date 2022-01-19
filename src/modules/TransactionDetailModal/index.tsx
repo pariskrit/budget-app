@@ -8,7 +8,7 @@ import { transactionInterface } from "../AllTransactions";
 import DatePicker from "react-datepicker";
 import "react-datepicker/dist/react-datepicker.css";
 import "./style.scss";
-import { formatDate } from "../../helpers";
+import { currentUserId, formatDate } from "../../helpers";
 
 type TransactionType = { transaction: transactionInterface | null };
 
@@ -20,6 +20,7 @@ function TransactionDetailModal({ transaction }: TransactionType) {
   const [transactionToEdit, setTransactionToEdit] =
     useState<transactionInterface | null>(null);
   const [disabled, setDisabled] = useState(true);
+  const currentUser = currentUserId();
 
   const onDeleteTransaction = () => {
     const updatedMonthlyExpense = [
@@ -40,6 +41,7 @@ function TransactionDetailModal({ transaction }: TransactionType) {
           (oldTransaction) => oldTransaction.id !== transaction?.id
         ),
       ],
+      id: currentUser!,
     });
   };
 
@@ -54,6 +56,7 @@ function TransactionDetailModal({ transaction }: TransactionType) {
             : transaction
         ),
       ],
+      id: currentUser!,
     });
 
   const onClose = () => dispatch({ type: "TOGGLE_DETAIL_MODAL" });
@@ -110,10 +113,10 @@ function TransactionDetailModal({ transaction }: TransactionType) {
         <br />
         <select
           name="type"
-          value={transactionToEdit?.type ?? ""}
+          value={transactionToEdit?.type}
           onChange={onInputChange}
         >
-          <option selected value="" disabled>
+          <option defaultValue="Type" disabled>
             Type
           </option>
           <option value="personal">Personal</option>

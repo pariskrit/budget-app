@@ -3,6 +3,7 @@ import { AiOutlineConsoleSql } from "react-icons/ai";
 import Button from "../../components/Button";
 import Modal from "../../components/Modal";
 import { TransactionContext } from "../../context/TransactionContextProvider";
+import { currentUserId } from "../../helpers";
 import { useMutateTransaction } from "../../hooks/useMutateTransaction";
 
 function AddIncomeModal() {
@@ -21,6 +22,7 @@ function AddIncomeModal() {
       transactions: state.transactions,
       monthlyExpenses: state.monthlyExpenses,
       income: income!,
+      id: currentUserId()!,
     });
   };
 

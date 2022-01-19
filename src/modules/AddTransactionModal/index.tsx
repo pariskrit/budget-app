@@ -7,7 +7,7 @@ import { useMutateTransaction } from "../../hooks/useMutateTransaction";
 import DatePicker from "react-datepicker";
 import "react-datepicker/dist/react-datepicker.css";
 import "./style.scss";
-import { formatDate } from "../../helpers";
+import { currentUserId, formatDate } from "../../helpers";
 
 const defaultTransactionDetail = {
   date: "",
@@ -72,6 +72,7 @@ function AddTransactionModal() {
         },
         ...state.transactions,
       ],
+      id: currentUserId()!,
     });
   };
 
@@ -107,9 +108,7 @@ function AddTransactionModal() {
           value={transactionDetail.type}
           onChange={handleInputChange}
         >
-          <option selected value="" disabled>
-            Type
-          </option>
+          <option value=""></option>
           <option value="personal">Personal</option>
           <option value="home">Home</option>
         </select>

@@ -2,7 +2,7 @@ import React from "react";
 import "./style.scss";
 
 interface buttonType {
-  children: string;
+  children: React.ReactNode;
   type: "button" | "submit";
   onClick: (e: React.MouseEvent<HTMLButtonElement>) => void;
   isDeleteButton?: boolean;
