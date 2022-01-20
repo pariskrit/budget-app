@@ -8,12 +8,14 @@ import {
   updateProfile,
 } from "firebase/auth";
 import LoginRegisterContainer from "../../components/LoginRegisterContainer";
+import Error from "../../components/Error";
 
 const defaultState = { name: "", email: "", password: "" };
 
 function Register() {
   const [user, setUser] = useState(defaultState);
   const [isLogging, setIsLogging] = useState(false);
+  const [error, setError] = useState({ show: false, message: "" });
   const auth = getAuth();
   const navigate = useNavigate();
 
@@ -37,9 +39,8 @@ function Register() {
       setUser(defaultState);
       navigate("/overview", { replace: true });
     } catch (error: any) {
-      const errorCode = error.code;
-      const errorMessage = error.message;
-      console.log(errorCode, errorMessage);
+      console.log(error.message);
+      setError({ show: true, message: error.message });
       setIsLogging(false);
     }
   };
@@ -49,6 +50,7 @@ function Register() {
       loading={isLogging}
       imageSource="https://iconarchive.com/download/i87099/graphicloads/colorful-long-shadow/Lock.ico"
     >
+      <Error show={error.show} message={error.message} />
       <form>
         <label>
           <strong>Name:</strong>

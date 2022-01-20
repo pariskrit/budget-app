@@ -4,12 +4,14 @@ import Button from "../../components/Button";
 import "./style.scss";
 import { getAuth, signInWithEmailAndPassword } from "firebase/auth";
 import LoginRegisterContainer from "../../components/LoginRegisterContainer";
+import Error from "../../components/Error";
 
 const defaultState = { email: "", password: "" };
 
 function Login() {
   const [user, setUser] = useState(defaultState);
   const [isLogging, setIsLogging] = useState(false);
+  const [error, setError] = useState({ show: false, message: "" });
   const auth = getAuth();
   const navigate = useNavigate();
 
@@ -29,9 +31,8 @@ function Login() {
       localStorage.setItem("name", response.user.displayName || "");
       navigate("/overview", { replace: true });
     } catch (error: any) {
-      const errorCode = error.code;
-      const errorMessage = error.message;
-      console.log(errorCode, errorMessage);
+      setError({ show: true, message: "Incorrect Email Or Password" });
+
       setIsLogging(false);
     }
   };
@@ -41,6 +42,7 @@ function Login() {
       loading={isLogging}
       imageSource="https://iconarchive.com/download/i87099/graphicloads/colorful-long-shadow/Lock.ico"
     >
+      <Error message={error.message} show={error.show} />
       <form>
         <label>
           <strong>Email:</strong>

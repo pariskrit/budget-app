@@ -8,14 +8,13 @@ import { getAuth, signOut } from "firebase/auth";
 import { useNavigate } from "react-router-dom";
 import { formatDate } from "../../helpers";
 
-const name = localStorage.getItem("name");
-
 function Topbar() {
   const { state, dispatch } = useContext(TransactionContext);
   const [showDropdown, setShowDropdown] = useState(false);
   const auth = getAuth();
   const navigate = useNavigate();
   const logoutRef = useRef<HTMLDivElement>(null);
+  const name = localStorage.getItem("name");
 
   const toggleLogoutDropdown = () => setShowDropdown(true);
 
