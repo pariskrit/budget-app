@@ -2,7 +2,11 @@ import React, { useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import Button from "../../components/Button";
 import "./style.scss";
-import { getAuth, signInWithEmailAndPassword } from "firebase/auth";
+import {
+  createUserWithEmailAndPassword,
+  getAuth,
+  updateProfile,
+} from "firebase/auth";
 import LoginRegisterContainer from "../../components/LoginRegisterContainer";
 
 const defaultState = { name: "", email: "", password: "" };
@@ -19,11 +23,16 @@ function Register() {
   const onSubmit = async () => {
     setIsLogging(true);
     try {
-      const response = await signInWithEmailAndPassword(
+      const response = await createUserWithEmailAndPassword(
         auth,
         user.email,
         user.password
       );
+
+      if (auth.currentUser) {
+        await updateProfile(auth.currentUser, { displayName: user.name });
+      }
+
       localStorage.setItem("id", response.user.uid);
       setUser(defaultState);
       navigate("/overview", { replace: true });
@@ -31,9 +40,8 @@ function Register() {
       const errorCode = error.code;
       const errorMessage = error.message;
       console.log(errorCode, errorMessage);
+      setIsLogging(false);
     }
-
-    setIsLogging(false);
   };
 
   return (

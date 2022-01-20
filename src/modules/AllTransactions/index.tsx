@@ -1,5 +1,6 @@
 import React, { useContext, useState } from "react";
 import { useNavigate } from "react-router-dom";
+import NoData from "../../components/NoData";
 import TransactionDetailRow from "../../components/TransactionDetailRow";
 import { TransactionContext } from "../../context/TransactionContextProvider";
 import TransactionDetailModal from "../TransactionDetailModal";
@@ -52,6 +53,7 @@ function AllTransactions({
             <p onClick={goToTransactionsPage}>view all</p>
           ) : null}
         </div>
+        {!transactions.length ? <NoData title="Transactions" /> : null}
         {transactions.map((detail) => (
           <TransactionDetailRow
             key={detail.id}

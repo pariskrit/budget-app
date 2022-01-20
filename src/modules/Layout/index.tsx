@@ -35,9 +35,9 @@ function Layout() {
     dispatch({
       type: "SET_TRANSACTIONS",
       payload: {
-        monthlyExpenses: data.monthlyExpenses,
-        transactions: data.transactions,
-        income: data.income,
+        monthlyExpenses: data?.monthlyExpenses || [],
+        transactions: data?.transactions || [],
+        income: data?.income || 0,
       },
     });
   };
