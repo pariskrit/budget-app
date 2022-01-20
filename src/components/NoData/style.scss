@@ -1,0 +1,8 @@
+@import "../../styleSass/variables.scss";
+@import "../../styleSass/mixins.scss";
+
+.no_data {
+  color: $thirdColor;
+  height: 70%;
+  @include flexWithCenter;
+}

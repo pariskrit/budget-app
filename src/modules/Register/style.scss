@@ -1,0 +1,11 @@
+@import "../../styleSass/mixins.scss";
+@import "../../styleSass/variables.scss";
+
+.login_buttons {
+  @include flexWithJustify;
+  margin: 10px 0;
+
+  a {
+    color: white;
+  }
+}

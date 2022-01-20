@@ -2,13 +2,15 @@ import React from "react";
 import "./style.scss";
 
 interface buttonType {
-  children: string;
+  children: React.ReactNode;
   type: "button" | "submit";
-  onClick: () => void;
+  onClick: (e: React.MouseEvent<HTMLButtonElement>) => void;
+  isDeleteButton?: boolean;
+  disabled?: boolean;
 }
-function Button({ children, ...rest }: buttonType) {
+function Button({ children, isDeleteButton, ...rest }: buttonType) {
   return (
-    <button className="button" {...rest}>
+    <button className={`button ${isDeleteButton ? "delete" : null}`} {...rest}>
       {children}
     </button>
   );

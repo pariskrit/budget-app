@@ -1,0 +1,14 @@
+@import "../../styleSass/mixins.scss";
+
+.layout {
+  display: flex;
+}
+
+.right_container {
+  flex: 1;
+}
+
+.loader {
+  @include flexWithCenter;
+  height: 100vh;
+}

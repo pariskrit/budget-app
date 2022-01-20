@@ -11,4 +11,14 @@
   @include flexWithCenter;
   padding: 40px 0;
   color: $secondaryColor;
+
+  h1 {
+    width: 167px;
+    height: 40px;
+  }
+}
+
+.sidebar_elements {
+  width: 40%;
+  margin: auto;
 }

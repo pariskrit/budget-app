@@ -1,0 +1,36 @@
+@import "../../styleSass/mixins.scss";
+@import "../../styleSass/variables.scss";
+
+.modal_background {
+  background-color: rgba(0, 0, 0, 0.76);
+  opacity: 0;
+  visibility: hidden;
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  z-index: 1;
+  @include flexWithCenter;
+  transition: all 0.1s ease-in;
+}
+
+.transactionModal_header {
+  @include flexWithCenter;
+  text-decoration: underline;
+}
+
+.open {
+  opacity: 1;
+  visibility: visible;
+}
+
+.modal_container {
+  border-radius: 5px;
+  z-index: 3;
+  color: white;
+  background-color: $primaryColor;
+  padding: 20px;
+  max-height: 405px;
+  width: 400px;
+}

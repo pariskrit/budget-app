@@ -1,0 +1,29 @@
+@import "../../styleSass/mixins.scss";
+@import "../../styleSass/variables.scss";
+
+.login_container {
+  @include flexWithCenter;
+  height: 100vh;
+}
+
+.inner_container {
+  min-width: 300px;
+  padding: 30px;
+  border-radius: 5px;
+  background-color: #645f5f;
+
+  @include modalDesign;
+
+  input {
+    width: 93%;
+  }
+}
+
+.icon {
+  @include flexWithCenter;
+  margin-bottom: 10px;
+}
+
+.login_icon {
+  width: 30%;
+}

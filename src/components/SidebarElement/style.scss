@@ -1,8 +1,13 @@
 @import "../../styleSass/variables.scss";
 
+.link {
+  text-decoration: none;
+  &:active {
+    border: none;
+  }
+}
 .element {
   display: flex;
-  width: 35%;
   gap: 15px;
   align-items: center;
   margin: 4px auto;

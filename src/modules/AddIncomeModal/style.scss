@@ -1,0 +1,6 @@
+@import "../../styleSass/mixins.scss";
+@import "../../styleSass/variables.scss";
+
+.fieldsContainer {
+  @include modalDesign;
+}
