@@ -25,15 +25,13 @@ function Login() {
         user.password
       );
       localStorage.setItem("id", response.user.uid);
-      setUser(defaultState);
       navigate("/overview", { replace: true });
     } catch (error: any) {
       const errorCode = error.code;
       const errorMessage = error.message;
       console.log(errorCode, errorMessage);
+      setIsLogging(false);
     }
-
-    setIsLogging(false);
   };
 
   return (

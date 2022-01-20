@@ -113,7 +113,7 @@ function TransactionDetailModal({ transaction }: TransactionType) {
         <br />
         <select
           name="type"
-          value={transactionToEdit?.type}
+          value={transactionToEdit?.type ?? ""}
           onChange={onInputChange}
         >
           <option defaultValue="Type" disabled>
@@ -132,7 +132,7 @@ function TransactionDetailModal({ transaction }: TransactionType) {
           type="text"
           placeholder="description"
           name="description"
-          value={transactionToEdit?.description}
+          value={transactionToEdit?.description ?? ""}
           onChange={onInputChange}
         />
       </div>
@@ -145,7 +145,7 @@ function TransactionDetailModal({ transaction }: TransactionType) {
           type="number"
           placeholder="amount"
           name="amount"
-          value={transactionToEdit?.amount}
+          value={transactionToEdit?.amount ?? ""}
           onChange={onInputChange}
         />
       </div>

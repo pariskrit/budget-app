@@ -20,7 +20,7 @@ function Topbar() {
     signOut(auth)
       .then(() => {
         localStorage.removeItem("id");
-        navigate("/login");
+        navigate("/login", { replace: true });
       })
       .catch((error) => console.log(error));
   };
@@ -28,6 +28,9 @@ function Topbar() {
   useEffect(() => {
     const logoutOpenBlock = document.querySelector(".topbar_rightside_right");
     document.addEventListener("click", (e) => {
+      if (!logoutRef.current) {
+        return;
+      }
       if (
         !logoutRef.current!.contains(e.target as Node) &&
         !logoutOpenBlock?.contains(e.target as Node)
