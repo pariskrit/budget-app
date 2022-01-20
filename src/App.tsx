@@ -7,6 +7,7 @@ import Overview from "./pages/Overview";
 import Transactions from "./pages/Transactions";
 import Login from "./modules/Login";
 import ProtectedRoute from "./components/ProtectedRoute";
+import Register from "./modules/Register";
 
 function App() {
   return (
@@ -21,6 +22,7 @@ function App() {
             </Route>
           </Route>
           <Route path="/login" element={<Login />} />
+          <Route path="/register" element={<Register />} />
         </Routes>
       </BrowserRouter>
     </div>

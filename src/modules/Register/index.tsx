@@ -5,9 +5,9 @@ import "./style.scss";
 import { getAuth, signInWithEmailAndPassword } from "firebase/auth";
 import LoginRegisterContainer from "../../components/LoginRegisterContainer";
 
-const defaultState = { email: "", password: "" };
+const defaultState = { name: "", email: "", password: "" };
 
-function Login() {
+function Register() {
   const [user, setUser] = useState(defaultState);
   const [isLogging, setIsLogging] = useState(false);
   const auth = getAuth();
@@ -43,6 +43,18 @@ function Login() {
     >
       <form>
         <label>
+          <strong>Name:</strong>
+        </label>
+        <br />
+        <input
+          type="text"
+          placeholder="name"
+          name="name"
+          value={user.name}
+          onChange={onInputChange}
+        />
+        <br />
+        <label>
           <strong>Email:</strong>
         </label>
         <br />
@@ -67,13 +79,13 @@ function Login() {
         />
         <div className="login_buttons">
           <Button type="button" onClick={onSubmit} disabled={isLogging}>
-            Log In
+            Register
           </Button>
-          <Link to="/register">New Account</Link>
+          <Link to="/login">Already have a account</Link>
         </div>
       </form>
     </LoginRegisterContainer>
   );
 }
 
-export default Login;
+export default Register;
