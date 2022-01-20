@@ -6,6 +6,9 @@ import Button from "../Button";
 import { TransactionContext } from "../../context/TransactionContextProvider";
 import { getAuth, signOut } from "firebase/auth";
 import { useNavigate } from "react-router-dom";
+import { formatDate } from "../../helpers";
+
+const name = localStorage.getItem("name");
 
 function Topbar() {
   const { state, dispatch } = useContext(TransactionContext);
@@ -20,6 +23,7 @@ function Topbar() {
     signOut(auth)
       .then(() => {
         localStorage.removeItem("id");
+        localStorage.removeItem("name");
         navigate("/login", { replace: true });
       })
       .catch((error) => console.log(error));
@@ -43,9 +47,9 @@ function Topbar() {
   return (
     <div className="topbar">
       <div>
-        <p className="topbar_name">Hi Pariskrit,</p>
-        <strong className="topbar_greet">Welcome Back</strong>
-        <p className="topbar_date">1 July,2021</p>
+        <p className="topbar_name">Hi {name},</p>
+        <strong className="topbar_greet">Welcome</strong>
+        <p className="topbar_date">{formatDate(new Date())}</p>
       </div>
       <Button
         type="button"
@@ -68,7 +72,7 @@ function Topbar() {
             onClick={toggleLogoutDropdown}
           >
             <div>
-              <p>Pariskrit</p>
+              <p>{name}</p>
               <p className="topbar_date">User</p>
             </div>
             <AiOutlineCaretDown />

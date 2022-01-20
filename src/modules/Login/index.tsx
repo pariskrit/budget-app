@@ -24,7 +24,9 @@ function Login() {
         user.email,
         user.password
       );
+
       localStorage.setItem("id", response.user.uid);
+      localStorage.setItem("name", response.user.displayName || "");
       navigate("/overview", { replace: true });
     } catch (error: any) {
       const errorCode = error.code;

@@ -25,7 +25,7 @@ function BarPieChart() {
 
   return (
     <div className="barchart">
-      {barData.length ? (
+      {barData.some((data) => data.amount) ? (
         <BarChart
           width={800}
           height={250}

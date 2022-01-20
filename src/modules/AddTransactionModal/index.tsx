@@ -16,6 +16,10 @@ const defaultTransactionDetail = {
   type: "",
 };
 
+const defaultMonthlyExpense = [
+  ...months.map((month) => ({ month, amount: 0 })),
+];
+
 function AddTransactionModal() {
   const { state, dispatch } = useContext(TransactionContext);
   const [transactionDetail, setTransactionDetail] = useState(
@@ -51,8 +55,12 @@ function AddTransactionModal() {
       return;
     }
 
+    const monthlyExpenses = state.monthlyExpenses.length
+      ? state.monthlyExpenses
+      : defaultMonthlyExpense;
+
     const updatedMonthlyExpense = [
-      ...state.monthlyExpenses.map((monthlyExpense) =>
+      ...monthlyExpenses.map((monthlyExpense) =>
         monthlyExpense.month === months[new Date().getMonth()]
           ? {
               ...monthlyExpense,
