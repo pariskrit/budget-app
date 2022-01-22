@@ -39,4 +39,14 @@ export const formatDate = (date) => {
   return `${date.getDate()} ${months[date.getMonth()]} 2022`;
 };
 
+export const formatLongDescriptions = (description) => {
+  let descriptionArray = description.split(" ");
+
+  if (descriptionArray.length > 2) {
+    return `${descriptionArray[0]} ${descriptionArray[1]}....`;
+  }
+
+  return description;
+};
+
 export const currentUserId = () => localStorage.getItem("id");

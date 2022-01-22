@@ -20,17 +20,20 @@ const defaultMonthlyExpense = [
   ...months.map((month) => ({ month, amount: 0 })),
 ];
 
+const defaultDate = new Date();
+
 function AddTransactionModal() {
   const { state, dispatch } = useContext(TransactionContext);
   const [transactionDetail, setTransactionDetail] = useState(
     defaultTransactionDetail
   );
   let inputRef = useRef<HTMLInputElement>(null);
-  const [selectedDate, setSelectedDate] = useState(new Date());
+  const [selectedDate, setSelectedDate] = useState(defaultDate);
   const mutation = useMutateTransaction(() => onClose());
 
   const onClose = () => {
     setTransactionDetail(defaultTransactionDetail);
+    setSelectedDate(defaultDate);
 
     dispatch({ type: "TOGGLE_ADD_MODAL" });
   };
@@ -89,7 +92,6 @@ function AddTransactionModal() {
       inputRef.current.focus();
     }
   }, [state.showAddModal]);
-
   return (
     <Modal
       open={state.showAddModal}
@@ -142,9 +144,9 @@ function AddTransactionModal() {
         <br />
         <input
           type="number"
-          placeholder="amount"
+          placeholder="0"
           name="amount"
-          value={transactionDetail.amount}
+          value={transactionDetail.amount || ""}
           onChange={handleInputChange}
         />
       </div>
