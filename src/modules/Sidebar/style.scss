@@ -2,7 +2,7 @@
 @import "../../styleSass/mixins.scss";
 
 .sidebar {
-  width: 388px;
+  flex: 0.3;
   height: 100vh;
   background-color: $primaryColor;
 }

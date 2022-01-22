@@ -8,7 +8,7 @@
   position: absolute;
   top: 0;
   left: 0;
-  width: 100vw;
+  width: 100%;
   height: 100vh;
   z-index: 1;
   @include flexWithCenter;
@@ -31,6 +31,6 @@
   color: white;
   background-color: $primaryColor;
   padding: 20px;
-  max-height: 405px;
-  width: 400px;
+  max-height: 75%;
+  width: 30%;
 }
