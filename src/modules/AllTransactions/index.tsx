@@ -59,6 +59,7 @@ function AllTransactions({
             key={detail.id}
             transaction={detail}
             onClick={handleTransactionRowClick}
+            showAllTransactions={showAllTransactions}
           />
         ))}
       </div>

@@ -29,6 +29,7 @@ function Layout() {
   };
   const { isLoading } = useQuery("transactions", getTransactionsData, {
     onSuccess: (data: responseDataInterface) => onSuccess(data),
+    refetchOnWindowFocus: false,
   });
 
   const onSuccess = (data: responseDataInterface) => {

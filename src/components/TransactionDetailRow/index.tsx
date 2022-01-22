@@ -5,14 +5,19 @@ import "./style.scss";
 
 interface transactionDetailInterface {
   transaction: transactionInterface;
+  showAllTransactions: boolean;
   onClick: (transaction: transactionInterface) => void;
 }
 function TransactionDetailRow({
   transaction,
+  showAllTransactions,
   onClick,
 }: transactionDetailInterface) {
   const { description, date, amount } = transaction;
-  const formattedDescription = formatLongDescriptions(description);
+  const formattedDescription = showAllTransactions
+    ? description
+    : formatLongDescriptions(description);
+
   return (
     <div className="transactiondetailrow " onClick={() => onClick(transaction)}>
       <span>&#8226;</span>
