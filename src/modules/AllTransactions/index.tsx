@@ -46,7 +46,11 @@ function AllTransactions({
   return (
     <>
       <TransactionDetailModal transaction={selectedTransaction} />
-      <div className="latesttransactions">
+      <div
+        className={`latesttransactions ${
+          showAllTransactions ? "scroll" : null
+        }`}
+      >
         <div className="latesttransactions_headercontainer">
           <strong className="latesttransactions_header">{title}</strong>
           {!showAllTransactions ? (
