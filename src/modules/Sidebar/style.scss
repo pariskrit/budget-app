@@ -9,13 +9,17 @@
 
 .header {
   @include flexWithCenter;
-  padding: 40px 0;
+  padding: 20px 0;
   color: $secondaryColor;
 
   h1 {
     width: 167px;
     height: 40px;
   }
+}
+
+.header_title {
+  width: 40%;
 }
 
 .sidebar_elements {
