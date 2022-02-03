@@ -21,6 +21,8 @@ function AddIncomeModal() {
     mutation.mutate({
       transactions: state.transactions,
       monthlyExpenses: state.monthlyExpenses,
+      transactionsList: state.transactionsList,
+
       income: income!,
       id: currentUserId()!,
     });

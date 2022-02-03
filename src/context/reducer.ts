@@ -1,6 +1,7 @@
 import { transactionInterface } from "../modules/AllTransactions";
 
 export interface responseDataInterface {
+  transactionsList: { month: string; transactions: transactionInterface[] }[];
   transactions: transactionInterface[];
   income: number;
   monthlyExpenses: any[];
@@ -17,6 +18,7 @@ export const defaultReducerState = {
   showDetailModal: false,
   showIncomeModal: false,
   transactions: [],
+  transactionsList: [],
   monthlyExpenses: [],
   income: 0,
   expense: 0,
@@ -55,6 +57,7 @@ export const reducer = (state: reducerStateInterface, action: actionType) => {
         income: action.payload.income,
         monthlyExpenses: action.payload.monthlyExpenses,
         transactions: action.payload.transactions,
+        transactionsList: action.payload.transactionsList,
         expense: action.payload.transactions.reduce(
           (acc, curr) => curr.amount + acc,
           0

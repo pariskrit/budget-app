@@ -15,6 +15,7 @@ export const updateTransaction = async (payload: {
   income: number;
   monthlyExpenses: any[];
   transactions: transactionInterface[];
+  transactionsList: { month: string; transactions: transactionInterface[] }[];
   id: string;
 }) => {
   try {
@@ -22,6 +23,7 @@ export const updateTransaction = async (payload: {
       income: payload.income,
       monthlyExpenses: payload.monthlyExpenses,
       transactions: payload.transactions,
+      transactionsList: payload.transactionsList,
     });
     return response;
   } catch (error) {

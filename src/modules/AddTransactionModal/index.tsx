@@ -72,17 +72,29 @@ function AddTransactionModal() {
           : monthlyExpense
       ),
     ];
+
     mutation.mutate({
       income: state.income,
       monthlyExpenses: updatedMonthlyExpense,
-      transactions: [
-        {
-          ...transactionDetail,
-          id: Date.now(),
-          date: formatDate(selectedDate),
-        },
-        ...state.transactions,
+      transactions: [...state.transactions],
+      transactionsList: [
+        ...state.transactionsList.map((transaction) =>
+          transaction.month === months[selectedDate.getMonth()]
+            ? {
+                ...transaction,
+                transactions: [
+                  {
+                    ...transactionDetail,
+                    id: Date.now(),
+                    date: formatDate(selectedDate),
+                  },
+                  ...transaction.transactions,
+                ],
+              }
+            : transaction
+        ),
       ],
+
       id: currentUserId()!,
     });
   };

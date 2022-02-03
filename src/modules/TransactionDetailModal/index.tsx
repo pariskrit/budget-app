@@ -36,6 +36,8 @@ function TransactionDetailModal({ transaction }: TransactionType) {
     mutation.mutate({
       income: state.income,
       monthlyExpenses: updatedMonthlyExpense,
+      transactionsList: [...state.transactionsList],
+
       transactions: [
         ...state.transactions.filter(
           (oldTransaction) => oldTransaction.id !== transaction?.id
@@ -49,6 +51,7 @@ function TransactionDetailModal({ transaction }: TransactionType) {
     mutation.mutate({
       income: state.income,
       monthlyExpenses: state.monthlyExpenses,
+      transactionsList: [...state.transactionsList],
       transactions: [
         ...state.transactions.map((transaction) =>
           transaction.id === transactionToEdit?.id

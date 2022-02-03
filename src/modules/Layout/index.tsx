@@ -37,7 +37,8 @@ function Layout() {
       type: "SET_TRANSACTIONS",
       payload: {
         monthlyExpenses: data?.monthlyExpenses || [],
-        transactions: data?.transactions || [],
+        transactionsList: data?.transactionsList || [],
+        transactions: data?.transactions,
         income: data?.income || 0,
       },
     });
